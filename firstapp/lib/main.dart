@@ -1,64 +1,91 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 void main(){
-  runApp(const myApp());//no materialapp here
-
+  runApp(photo());
 }
-//type stl
-class myApp extends StatelessWidget {
-  const myApp({super.key});
+class photo extends StatelessWidget {
+  const photo({super.key});
 
   @override
   Widget build(BuildContext context) {
-    //After return replace with previous code              
     return MaterialApp(
-    debugShowCheckedModeBanner: false,
-    title: "First App",
-    home: Scaffold(
-      //see inside scaffold
-      floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,//for placing home button in center 
-      floatingActionButton: Container(
-         decoration: BoxDecoration(
-        borderRadius:  BorderRadius.circular(30),  color: const Color.fromARGB(255, 57, 211, 62)),
-        child:
-           IconButton(onPressed: (){},
-            icon: const Icon(Icons.home_filled,size: 40,color: Colors.white,),// for placing home button
-      hoverColor:const Color.fromARGB(255, 127, 230, 130) ,// for color during hover
-     
-      ), ), 
-      backgroundColor: Colors.amber,
-      appBar: AppBar(
-        centerTitle: true,
-      backgroundColor: Colors.blue,
-      title: const Text("My Wallet",
-      style: TextStyle(color: Colors.black,fontSize: 30, letterSpacing: 3
-      ),
-      ),
-    ),
-    // body is declared outside appbar
-    
-       body: const Center(
-        child:Column(
-          mainAxisSize: MainAxisSize.min,//to place name address in whole page ko center
-          children: [
-          IconButton(onPressed: null, icon:  Icon (Icons.account_box, color: Color.fromARGB(255, 245, 242, 241), size: 60,),),  
-          Text("Aishwarya Adhikari",
-          style: TextStyle(fontSize: 20,letterSpacing: 2),),
-          SizedBox(height: 10,),
-          Text("Birtamode",
-          style: TextStyle(fontSize: 20,letterSpacing: 2),),
-          IconButton(onPressed: null, icon:Icon (Icons.account_balance_wallet, color: Color.fromARGB(255, 117, 49, 25), size: 40,),),
-          Text("Pay Here",
-          style: TextStyle( color:Color.fromARGB(255, 48, 6, 236),fontSize:  30,letterSpacing: 2, ),)
-        ],)
-        
-        )
-    ),
-      
+      debugShowCheckedModeBanner: false,
+      title:" Recognise",
+      home: homePage(),
 
     );
-  
-   } 
+  }
+}
+class homePage extends StatefulWidget {
+  const homePage({super.key});
 
+  @override
+  State<homePage> createState() => _homePageState();
 }
 
+class _homePageState extends State<homePage> {
+  // generates random number
+    var random=Random();
+    var choice='';
+    void generate(){
+      setState(() {
+        // choice= random.nextInt(4) +1;
+        choice=a.text;
+      });
+  }
+  TextEditingController a =TextEditingController(text: "");//storage for datas
+  
 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.amber,
+
+        title: Text(
+          "PHOTO SELECTOR",
+          style: TextStyle(color: Colors.black),
+        ),
+        
+      ),
+      body: Container(
+
+      decoration: BoxDecoration(border: Border.all(width: 10,color: Colors.white)),
+        child: ListView(
+          // scrollDirection: Axis.horizontal,
+          children: [
+          Container( width:200,child:  TextField(controller: a,decoration: InputDecoration(hintText: "Enter the photo of your choice"))),// hinttext ma no. lekhda text harauxa
+
+            IconButton(onPressed: generate, icon:Icon(Icons.search)),
+             Padding(
+               padding: const EdgeInsets.only(right: 8.0),
+               child: Container(
+                height: 500,
+                width: 800,
+                child: Image.asset('images/${choice}.jpeg')),
+             ),
+             
+        //  Padding(
+        //    padding: const EdgeInsets.only(right:8.0),
+        //    child: Image.asset('images/shyam.jpeg'),
+        //  ),
+        //  Padding(
+        //    padding: const EdgeInsets.only(right:8.0),
+        //    child: Image.asset('images/rita.jpeg'),
+        //  ),
+        //  Padding(
+        //    padding: const EdgeInsets.only(right:8.0),
+        //    child: Image.asset('images/sita.jpeg'),
+        //  ),
+        //  Padding(
+        //    padding: const EdgeInsets.only(right:8.0),
+        //    child: Image.asset('images/gita.jpeg'),
+        //  ),
+        
+          ],
+        ),
+      ),
+    );
+  }
+}
